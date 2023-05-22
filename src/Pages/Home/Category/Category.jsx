@@ -10,10 +10,15 @@ import slider2 from '../../../assets/home/slide2.jpg'
 import slider3 from '../../../assets/home/slide3.jpg'
 import slider4 from '../../../assets/home/slide4.jpg'
 import slider5 from '../../../assets/home/slide5.jpg'
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const Category = () => {
     return (
         <div className="my-8">
+               <SectionTitle
+                subHeading={"From 11:00am to 10:00pm"}
+                heading={"order online"}
+                ></SectionTitle>
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
@@ -24,6 +29,7 @@ const Category = () => {
                 modules={[Pagination]}
                 className="mySwiper"
             >
+             
                 <SwiperSlide>
                     <img src={slider1} alt="" />
                     <h3 className="text-3xl text-center  -mt-16 uppercase text-white shadow">Salad</h3>
