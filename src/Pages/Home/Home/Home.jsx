@@ -6,6 +6,7 @@ import Poster from '../Poster/Poster';
 import Contact from '../Contact/Contact';
 import ChefRecommend from '../ChefRecommend/ChefRecommend';
 import Featured from '../Featured/Featured';
+import Review from '../../Review/Review';
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
              <Contact></Contact>
              <ChefRecommend></ChefRecommend>
              <Featured></Featured>
+             <Review></Review>
         </div>
     );
 };
