@@ -22,7 +22,7 @@ const Category = () => {
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
-                centeredSlides={true}
+                // centeredSlides={true}
                 pagination={{
                   clickable: true,
                 }}
@@ -31,23 +31,23 @@ const Category = () => {
             >
              
                 <SwiperSlide>
-                    <img src={slider1} alt="" />
+                    <img className="mb-20" src={slider1} alt="" />
                     <h3 className="text-3xl text-center  -mt-16 uppercase text-white shadow">Salad</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slider2} alt="" />
+                    <img className="mb-20" src={slider2} alt="" />
                     <h3 className="text-3xl text-center  -mt-16 uppercase shadow text-white">pizza</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slider3} alt="" />
+                    <img className="mb-20" src={slider3} alt="" />
                     <h3 className="text-3xl text-center  -mt-16 uppercase shadow text-white">Soup</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slider4} alt="" />
+                    <img className="mb-20" src={slider4} alt="" />
                     <h3 className="text-3xl text-center  -mt-16 uppercase shadow text-white">dessert</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slider5} alt="" />
+                    <img className="mb-20" src={slider5} alt="" />
                     <h3 className="text-3xl text-center  -mt-16 uppercase shadow text-white">Salad</h3>
                 </SwiperSlide>
             </Swiper>
