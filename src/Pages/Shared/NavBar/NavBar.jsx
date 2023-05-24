@@ -6,10 +6,11 @@ const NavBar = () => {
                   
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/menu">Our Menu</Link></li>
+                        <li><Link to="/order">Order Food</Link></li>
     </>
     return (
         <div>
-            <div className="navbar fixed z-10 bg-black bg-opacity-20  h-20 max-w-screen-xl text-white">
+            <div className="navbar fixed z-10 bg-black bg-opacity-20  h-20 max-w-6xl text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
