@@ -15,7 +15,7 @@ const CategoryMenu = ({item,title,img,description}) => {
         }  
       </div>
              <div className='text-center my-4'>
-               <Link to={`order/${title}`}> <button className='btn btn-outline btn-error border-0 border-b-4'>Order Your Favourite Food</button></Link>
+               <Link to={`/order/${title}`}> <button className='btn btn-outline btn-error border-0 border-b-4'>Order Your Favourite Food</button></Link>
              </div>
         </div>
     );
