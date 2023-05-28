@@ -1,8 +1,13 @@
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { loadCaptchaEnginge, LoadCanvasTemplate,  validateCaptcha } from 'react-simple-captcha';
 import loginImg from '../../../../assets/others/authentication1.png'
 import './Login.css'
 import { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useContext } from 'react';
+import { AuthContext } from '../../../../Provider/AuthProvider/AuthProvider';
+import { Link } from 'react-router-dom';
 const Login = () => {
+    const {LogIn}= useContext(AuthContext)
     const captchaRef = useRef(null)
     const [disabled ,setDisabled]= useState(true)
     useEffect(()=>{
@@ -14,12 +19,21 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email,password)
+        LogIn(email,password)
+        .then(result=>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+        })
+        .catch(error=>{
+            console.log(error.message)
+           
+          })
 
     }
     const handleValidateCaptcha = ()=>{
         const user_captcha_value = captchaRef.current.value;
-       
-        if (validateCaptcha(user_captcha_value)){
+         console.log(user_captcha_value)
+        if (validateCaptcha(user_captcha_value)==true){
             setDisabled(false)
         }
         else{
@@ -29,6 +43,10 @@ const Login = () => {
     return (
         
         <div>
+             <Helmet>
+                <title>Bistro Boss | LogIn</title>
+
+            </Helmet>
             
             <div className="bimg flex lg:flex-row-reverse">
             <div className="w-1/2">
@@ -66,24 +84,27 @@ const Login = () => {
                             </label>
                             <input
                                 ref={captchaRef}
+                            
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-00 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password"
+                                id="captcha"
                                 type="text"
                                 name='Captcha'
                                 placeholder="Enter Your Captcha"
                             />
-                            <button onClick={handleValidateCaptcha} className="btn btn-outline  btn-xs mt-5">Valided</button>
+                               <button type='button'   onClick={handleValidateCaptcha} className="btn btn-outline  btn-xs mb-2">Valided</button>
                         </div>
+                     
                         <div className="flex items-center justify-between">
                           
-                            <input type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"    disabled={true} value="Log IN" />
-                            <a
+                            <button disabled={disabled} type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-blue-200" > LogIN</button>
+                            <Link
                                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                                 href="#"
                             >
                                 Forgot Password?
-                            </a>
+                            </Link>
                         </div>
+                            <p className='text-center mt-5'><small>New here? <Link to='/signup'><span className='text-blue-500 hover:text-blue-700'>Please SignUp</span></Link></small></p>
                     </form>
                 </div>
             </div>
