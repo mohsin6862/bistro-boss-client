@@ -2,19 +2,37 @@ import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
 import signupLogo from '../../assets/others/authentication2.png'
 import './SignUp.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const {createUser} = useContext(AuthContext)
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const {createUser, UpdateProfileInfo} = useContext(AuthContext)
+    const navigate = useNavigate()
      const onSubmit = data => {
         console.log(data)
         createUser(data.email,data.password)
         .then(result=>{
             const newUser = result.user
             console.log(newUser)
+            UpdateProfileInfo(result.user,data.name,data.photoURL)
+            .then(()=>{
+                console.log("user created successfully")
+                reset()
+                Swal.fire({
+                    title: 'Sign Up Successful',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+                navigate('/')
+            })
+
         })
         .catch(error=>{
             console.log(error.message)
@@ -48,6 +66,20 @@ const SignUp = () => {
                                      {...register("name" ,{ required: true })}
                                 />
                                  {errors.name && <span className="text-red-600">Name is required</span>}
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                                    PhotoURL
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                               
+                                    type="text"
+                                    placeholder="Enter Your Photo URL"
+                                    name='name'
+                                     {...register("photoURL" ,{ required: true })}
+                                />
+                                 {errors.name && <span className="text-red-600">PhotoURL is required</span>}
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
