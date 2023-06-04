@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCalendarAlt, FaFirstOrder, FaHome, FaShoppingBag, FaShoppingCart, FaStar, FaWallet } from 'react-icons/fa';
+import { FaBars, FaCalendarAlt, FaFirstOrder, FaHome, FaShoppingBag, FaShoppingCart, FaStar, FaWallet } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -23,8 +23,9 @@ const Dashboard = () => {
                     <li><NavLink to="/dashboard//add-review"><FaStar></FaStar> Add Review</NavLink></li>
                     
                     <div className="divider"></div>
+                    
                     <li><NavLink to="/"><FaHome></FaHome> Home</NavLink></li>
-                    <li><NavLink to="/menu">Our Menu</NavLink></li>
+                    <li><NavLink to="/menu"><FaBars></FaBars> Our Menu</NavLink></li>
                     <li><NavLink to="/order/salad"><FaShoppingBag></FaShoppingBag> Order</NavLink></li>
                 </ul>
 
