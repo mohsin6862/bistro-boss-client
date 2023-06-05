@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
@@ -18,9 +19,24 @@ const SignUp = () => {
             const newUser = result.user
             console.log(newUser)
             UpdateProfileInfo(result.user,data.name,data.photoURL)
+           
             .then(()=>{
-                console.log("user created successfully")
+                const savedUser = {name : data.name, email: data.email, image: data.photoURL}
+
+                fetch('http://localhost:3000/users',{
+                    method:"POST",
+                    headers:{
+                        "content-type": "application/json"
+                    },
+                    body:JSON.stringify(savedUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.insertedId){
                 reset()
+                       
+                    }
+                })
                 Swal.fire({
                     title: 'Sign Up Successful',
                     showClass: {
@@ -51,14 +67,15 @@ const SignUp = () => {
                 <div className="w-1/2">
                     {/* Login Form */}
                     <div className="flex items-center justify-center h-screen">
-                        <form  onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4">
+             
+                        <form  onSubmit={handleSubmit(onSubmit)} className="bg-white text-black shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/4">
                             <h2 className="text-2xl mb-6">Sign Up</h2>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                                <label className="block text-black text-sm font-bold mb-2" htmlFor="username">
                                     Name
                                 </label>
                                 <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                
                                     type="text"
                                     placeholder="Enter Your Name"
@@ -68,11 +85,11 @@ const SignUp = () => {
                                  {errors.name && <span className="text-red-600">Name is required</span>}
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                                <label className="block text-black text-sm font-bold mb-2" htmlFor="username">
                                     PhotoURL
                                 </label>
                                 <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                
                                     type="text"
                                     placeholder="Enter Your Photo URL"
@@ -82,11 +99,11 @@ const SignUp = () => {
                                  {errors.name && <span className="text-red-600">PhotoURL is required</span>}
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                                <label className="block text-black text-sm font-bold mb-2" htmlFor="username">
                                     Email
                                 </label>
                                 <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none text-gray-100 focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none text-gray-700 focus:shadow-outline"
                                     {...register("email" ,{ required: true })}
                                     type="email"
                                     placeholder="Enter Your Email"
@@ -96,11 +113,11 @@ const SignUp = () => {
                                   {errors.email && <span className="text-red-600">Email is required</span>}
                             </div>
                             <div className="mb-3">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
                                     Password
                                 </label>
                                 <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none text-gray-100 focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none text-gray-700 focus:shadow-outline"
                                     id="password"
                                     type="password"
                                     name='password'
@@ -129,6 +146,8 @@ const SignUp = () => {
                             <p className='text-center mt-5'><small>Already have an account? <Link to='/login'><span className='text-blue-500 hover:text-blue-700'>Please Login</span></Link></small></p>
                         </form>
                     </div>
+                        <SocialLogin></SocialLogin>
+                     
                 </div>
                 <div className="w-1/2">
                     {/* Image */}
@@ -140,6 +159,7 @@ const SignUp = () => {
                     <img src={signupLogo} alt="" />
                 </div>
             </div>
+              
         </div>
     );
 };

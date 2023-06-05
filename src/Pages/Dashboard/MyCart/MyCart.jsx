@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Helmet } from 'react-helmet-async';
 import useCart from '../../../Hooks/useCart';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -8,7 +8,6 @@ const MyCart = () => {
     const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
 
     const handleDelete = (id)=>{
-        console.log(id)
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",

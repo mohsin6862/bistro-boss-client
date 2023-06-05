@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider/AuthProvider';
-import { FaBeer, FaShoppingBasket } from 'react-icons/fa';
+import { FaShoppingBasket } from 'react-icons/fa';
 import useCart from '../../../Hooks/useCart';
 
 const NavBar = () => {
@@ -24,7 +24,7 @@ const NavBar = () => {
         <li>  <Link to="/dashboard/mycart">
             <button className="flex gap-2">
                 <FaShoppingBasket></FaShoppingBasket>
-                <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                <div className="badge badge-error">+{cart?.length || 0}</div>
             </button>
 
         </Link>
