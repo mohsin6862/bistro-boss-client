@@ -14,8 +14,6 @@ const SocialLogin = () => {
         const loggedUser = result.user
         console.log(loggedUser)
         const savedUser = {name : loggedUser.displayName, email: loggedUser.email}
-
-       
         fetch('http://localhost:3000/users',{
                     method:"POST",
                     headers:{
@@ -24,12 +22,10 @@ const SocialLogin = () => {
                     body:JSON.stringify(savedUser)
                 })
                 .then(res => res.json())
-                .then(data => {
-                    if(data.insertedId){
-          
-                       
+                .then(() => {
+                  
                         navigate(from, { replace: true })
-                    }
+                    
                 })
          
             })
